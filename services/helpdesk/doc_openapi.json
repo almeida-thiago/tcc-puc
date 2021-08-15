@@ -1,0 +1,1172 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Helpdesk",
+    "description": "Create, read, update and delete tickets, tickets messages, tickets attachaments, tickets departaments, tickets types and tickets status.",
+    "contact": {
+      "name": "Kodit Tecnologia",
+      "email": "ola@kodit.com.br"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [{
+      "url": "http://localhost:9001"
+    },
+    {
+      "url": "http://app.kodit.com.br/authentication"
+    }
+  ],
+  "tags": [{
+      "name": "Tickets",
+      "description": "Creating, reading, updating and removing tickets"
+    },
+    {
+      "name": "Status",
+      "description": "Creating, reading, updating and removing tickets status"
+    },
+    {
+      "name": "Types",
+      "description": "Creating, reading, updating and removing tickets types"
+    },
+    {
+      "name": "Departaments",
+      "description": "Creating, reading, updating and removing helpdesk departaments"
+    },
+    {
+      "name": "Channels",
+      "description": "Creating, reading, updating and removing helpdesk channels"
+    }
+  ],
+  "paths": {
+    "/v1/departaments": {
+      "post": {
+        "tags": ["Departaments"],
+        "summary": "Creates a new departament",
+        "operationId": "createHelpdesksDepartaments",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Departament"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "get": {
+        "tags": ["Departaments"],
+        "summary": "Read one departament or all departaments",
+        "operationId": "readHelpdeskDepartaments",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "put": {
+        "tags": ["Departaments"],
+        "summary": "Updates an existing helpdesk departament",
+        "operationId": "updateHelpdeskDepartaments",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Departament"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "delete": {
+        "tags": ["Departaments"],
+        "summary": "Delete an exisitng helpdesk departament",
+        "operationId": "deleteHelpdeskDepartaments",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/channels": {
+      "post": {
+        "tags": ["Channels"],
+        "summary": "Creates a new channel",
+        "operationId": "createHelpdesksChannels",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Channel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "get": {
+        "tags": ["Channels"],
+        "summary": "Read one channel or all channels",
+        "operationId": "readHelpdeskChannels",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "put": {
+        "tags": ["Channels"],
+        "summary": "Updates an existing helpdesk channel",
+        "operationId": "updateHelpdeskChannels",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Channel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "delete": {
+        "tags": ["Channels"],
+        "summary": "Delete an exisitng helpdesk channel",
+        "operationId": "deleteHelpdeskChannels",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/tickets": {
+      "post": {
+        "tags": ["Tickets"],
+        "summary": "Creates a new ticket",
+        "operationId": "createTickets",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ticket"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "get": {
+        "tags": ["Tickets"],
+        "summary": "Read one ticket or all tickets",
+        "operationId": "readTickets",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "put": {
+        "tags": ["Tickets"],
+        "summary": "Updates an existing ticket",
+        "operationId": "updateTickets",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ticket"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "delete": {
+        "tags": ["Tickets"],
+        "summary": "Delete an exisitng ticket",
+        "operationId": "deleteTickets",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/tickets/messages": {
+      "post": {
+        "tags": ["Tickets"],
+        "summary": "Creates a new ticket message",
+        "operationId": "createTicketsMessages",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Message"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "get": {
+        "tags": ["Tickets"],
+        "summary": "Read one message or all messages for ticket",
+        "operationId": "readTicketsMessages",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "ticket",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "put": {
+        "tags": ["Tickets"],
+        "summary": "Updates an existing ticket message",
+        "operationId": "updateTicketsMessages",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Message"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "delete": {
+        "tags": ["Tickets"],
+        "summary": "Delete an exisitng ticket message",
+        "operationId": "deleteTicketsMessages",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/tickets/status": {
+      "post": {
+        "tags": ["Status"],
+        "summary": "Creates a new status for ticket",
+        "operationId": "createTicketsStatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Status"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "get": {
+        "tags": ["Status"],
+        "summary": "Read one or all status for tickets",
+        "operationId": "readTicketsStatus",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "put": {
+        "tags": ["Status"],
+        "summary": "Updates an existing ticket status",
+        "operationId": "updateTicketsStatus",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Status"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "delete": {
+        "tags": ["Status"],
+        "summary": "Delete an exisitng ticket status",
+        "operationId": "deleteTicketsStatus",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/tickets/types": {
+      "post": {
+        "tags": ["Types"],
+        "summary": "Creates a new type for ticket",
+        "operationId": "createTicketsTypes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Type"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "get": {
+        "tags": ["Types"],
+        "summary": "Read one type or all types for tickets",
+        "operationId": "readTicketsTypes",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "put": {
+        "tags": ["Types"],
+        "summary": "Updates an existing ticket type",
+        "operationId": "updateTicketsTypes",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Type"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "delete": {
+        "tags": ["Types"],
+        "summary": "Delete an exisitng ticket type",
+        "operationId": "deleteTicketsTypes",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/tickets/attachaments": {
+      "post": {
+        "tags": ["Tickets"],
+        "summary": "Creates a new attachament for ticket",
+        "operationId": "createTicketsAttachaments",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Attachament"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "get": {
+        "tags": ["Tickets"],
+        "summary": "Read one attachament or all attachaments for tickets",
+        "operationId": "readTicketsAttachaments",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }, {
+          "name": "ticket",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "put": {
+        "tags": ["Tickets"],
+        "summary": "Updates an existing ticket attachament",
+        "operationId": "updateTicketsAttachaments",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Attachament"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "delete": {
+        "tags": ["Tickets"],
+        "summary": "Delete an exisitng attachament",
+        "operationId": "deletePeoplePhoneNumber",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Ticket": {
+        "required": [
+          "title",
+          "type_id",
+          "status_id",
+          "departament_id",
+          "owner_id",
+          "agent_id"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "ticket title"
+          },
+          "type_id": {
+            "type": "number",
+            "example": 1
+          },
+          "status_id": {
+            "type": "number",
+            "example": 1
+          },
+          "departament_id": {
+            "type": "number",
+            "example": 1
+          },
+          "message": {
+            "type": "string",
+            "example": "lorem ipsum dolor"
+          },
+          "owner_id": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "agent_id": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          }
+        }
+      },
+      "Message": {
+        "required": [
+          "ticket_id",
+          "person_id",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "person_id": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "message": {
+            "type": "string",
+            "example": "lorem ipsum dolor"
+          }
+        }
+      },
+      "Attachament": {
+        "required": [
+          "ticket_id",
+          "message_id",
+          "name",
+          "link",
+          "extention",
+          "size"
+        ],
+        "type": "object",
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "example": "20210000000000001"
+          },
+          "message_id": {
+            "type": "number",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "filename"
+          },
+          "link": {
+            "type": "string",
+            "example": "http://filelink.com"
+          },
+          "extention": {
+            "type": "string",
+            "example": "pdf"
+          },
+          "size": {
+            "type": "number",
+            "example": 2000
+          }
+        }
+      },
+      "Status": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "open"
+          }
+        }
+      },
+      "Type": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "issue"
+          }
+        }
+      },
+      "Departament": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "support"
+          }
+        }
+      },
+      "Channel": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "support"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": true,
+              "payload": {}
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "payload": {}
+              }
+            }
+          }
+        }
+      },
+      "201": {
+        "description": "Created",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": true,
+              "payload": {}
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "payload": {}
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": false,
+              "error": {
+                "code": "ER01",
+                "message": "error message",
+                "details": "error message details"
+              }
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Not authorized",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": false,
+              "error": {
+                "code": "ER01",
+                "message": "error message",
+                "details": "error message details"
+              }
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "JWT": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

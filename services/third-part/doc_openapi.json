@@ -1,0 +1,539 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Third Part ",
+    "description": "Third part services to integrate in owner services. Inluded in this service: e-mail (read and send) messages, WhatsApp recive and send messages, SMS send messages.",
+    "contact": {
+      "name": "Kodit Tecnologia",
+      "email": "ola@kodit.com.br"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [{
+      "url": "http://localhost:9000"
+    },
+    {
+      "url": "http://app.kodit.com.br/third-part"
+    }
+  ],
+  "tags": [{
+    "name": "E-mail",
+    "description": "Send and recive e-mail messages"
+  }, {
+    "name": "SMS",
+    "description": "Send SMS messages"
+  }, {
+    "name": "WhatsApp",
+    "description": "Send and recive WhatsApp messages and media"
+  }],
+  "paths": {
+    "/v1/email": {
+      "get": {
+        "tags": ["E-mail"],
+        "summary": "Get inbox e-mail messages",
+        "operationId": "inboxEmail",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "post": {
+        "tags": ["E-mail"],
+        "summary": "Sends a e-mail message",
+        "operationId": "sendEmail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Email"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "delete": {
+        "tags": ["E-mail"],
+        "summary": "Delete an e-mail",
+        "operationId": "deleteEmail",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/sms": {
+      "post": {
+        "tags": ["SMS"],
+        "summary": "Sends a SMS message",
+        "operationId": "sendSms",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sms"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/whatsapp/start/{id}": {
+      "get": {
+        "tags": ["WhatsApp"],
+        "summary": "Starts a WhatsApp session",
+        "operationId": "startWhatsappSession",
+        "parameters": [{
+          "name": "id",
+          "description": "WhatsApp session id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/whatsapp/messages/{id}/{idChat}": {
+      "get": {
+        "tags": ["WhatsApp"],
+        "summary": "Gets WhatsApp messages from chat",
+        "operationId": "getChatMessagesWhatsapp",
+        "parameters": [{
+          "name": "id",
+          "description": "WhatsApp session id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }, {
+          "name": "idChat",
+          "description": "WhatsApp chat id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }, {
+          "name": "all",
+          "description": "Get all chat messages",
+          "in": "query",
+          "schema": {
+            "type": "boolean"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/whatsapp/messages/{id}": {
+      "post": {
+        "tags": ["WhatsApp"],
+        "summary": "Sends a WhatsApp message",
+        "operationId": "sendWhatsappMessage",
+        "parameters": [{
+          "name": "id",
+          "description": "WhatsApp session id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhatsappMessage"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/whatsapp/chats/{id}": {
+      "get": {
+        "tags": ["WhatsApp"],
+        "summary": "Get a WhatsApp chats list",
+        "operationId": "getWhatsappChats",
+        "parameters": [{
+          "name": "id",
+          "description": "WhatsApp session id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/whatsapp/media/{id}": {
+      "post": {
+        "tags": ["WhatsApp"],
+        "summary": "Sends a WhatsApp media",
+        "operationId": "sendWhatsappMiedia",
+        "parameters": [{
+          "name": "id",
+          "description": "WhatsApp session id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WhatsappMedia"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Email": {
+        "required": [
+          "to",
+          "subject",
+          "text",
+          "html"
+        ],
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "string",
+            "example": "johndoe@provider.com"
+          },
+          "subject": {
+            "type": "string",
+            "example": "Lorem ipsum"
+          },
+          "text": {
+            "type": "string",
+            "example": "Lorem ipsum dolor amet."
+          },
+          "html": {
+            "type": "string",
+            "example": "<p>Lorem ipsum dolor amet.</p>"
+          }
+        }
+      },
+      "Sms": {
+        "required": [
+          "to",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "number",
+            "example": 5511912345678
+          },
+          "message": {
+            "type": "string",
+            "example": "Lorem ipsum dolor amet"
+          }
+        }
+      },
+      "WhatsappMessage": {
+        "required": [
+          "to",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "number",
+            "example": 5511912345678
+          },
+          "message": {
+            "type": "string",
+            "example": "Lorem ipsum dolor amet"
+          }
+        }
+      },
+      "WhatsappMedia": {
+        "required": [
+          "to",
+          "type",
+          "filename",
+          "base64"
+        ],
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "number",
+            "example": 5511912345678
+          },
+          "message": {
+            "type": "string",
+            "example": "Lorem ipsum dolor amet"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["audio", "image", "file", "link"],
+            "example": "file"
+          },
+          "filename": {
+            "type": "string",
+            "example": "lorem_ipsum.pdf"
+          },
+          "data": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": true,
+              "payload": {}
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "payload": {}
+              }
+            }
+          }
+        }
+      },
+      "201": {
+        "description": "Created",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": true,
+              "payload": {}
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "payload": {}
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": false,
+              "error": {
+                "code": "ER01",
+                "message": "error message",
+                "details": "error message details"
+              }
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Not authorized",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": false,
+              "error": {
+                "code": "ER01",
+                "message": "error message",
+                "details": "error message details"
+              }
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "JWT": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

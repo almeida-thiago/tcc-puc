@@ -1,0 +1,681 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Authentication",
+    "description": "Authorize and manage access with JWT.",
+    "contact": {
+      "name": "Kodit Tecnologia",
+      "email": "ola@kodit.com.br"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [{
+      "url": "http://localhost:9001"
+    },
+    {
+      "url": "http://app.kodit.com.br/authentication"
+    }
+  ],
+  "tags": [{
+      "name": "Authentication",
+      "description": "User login authentication and management"
+    },
+    {
+      "name": "Permissions",
+      "description": "User permissions management"
+    },
+    {
+      "name": "Users",
+      "description": "Creating, reading, updating and removing users"
+    },
+    {
+      "name": "Recovery",
+      "description": "Password recovery and change"
+    }
+  ],
+  "paths": {
+    "/v1/login": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Login and access to services with JWT",
+        "operationId": "loginUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
+    },
+    "/v1/renew": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Renew JWT",
+        "operationId": "renewLogin",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/v1/validate": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Validate JWT",
+        "operationId": "validateLogin",
+        "requestBody": {
+          "description": "Validates login with JWT and role permission for service",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Validate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/v1/users": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Creates a new user",
+        "operationId": "createUsers",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "Read one or all users",
+        "operationId": "readUsers",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "person",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Updates an existing user",
+        "operationId": "updateUsers",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "description": "Updates an existing user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete an existing user",
+        "operationId": "deleteUsers",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/forgot-password": {
+      "post": {
+        "tags": ["Recovery"],
+        "summary": "Set password as forgot",
+        "operationId": "recoveryPassword",
+        "requestBody": {
+          "description": "Set users password as forgot and sends a secret code",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPassword"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/v1/change-password": {
+      "post": {
+        "tags": ["Recovery"],
+        "summary": "Change user password with secret code",
+        "operationId": "changePassword",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPassword"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/v1/users/permissions": {
+      "post": {
+        "tags": ["Permissions"],
+        "summary": "Creates a new user permission",
+        "operationId": "createUsersPermissions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Permission"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "get": {
+        "tags": ["Permissions"],
+        "summary": "Read one or all users permissions",
+        "operationId": "readUsersPermissions",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "put": {
+        "tags": ["Permissions"],
+        "summary": "Updates an existing user permissions",
+        "operationId": "updateUsersPermissions",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Permission"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "delete": {
+        "tags": ["Permissions"],
+        "summary": "Delete an exisitng user permissions",
+        "operationId": "deleteUsersPermissions",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Validate": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string",
+            "example": "name-service"
+          },
+          "method": {
+            "type": "string",
+            "example": "get"
+          },
+          "routePath": {
+            "type": "string",
+            "example": "/v1/v1/route/path"
+          },
+          "personId": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "id": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          }
+        }
+      },
+      "Login": {
+        "required": [
+          "username",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "johndoe@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456"
+          },
+          "service": {
+            "type": "string",
+            "example": "google",
+            "description": "Login service to use",
+            "enum": [
+              "google"
+            ]
+          },
+          "accessToken": {
+            "type": "string",
+            "example": "..."
+          },
+          "keep_conected": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "ForgotPassword": {
+        "required": [
+          "username",
+          "password",
+          "secret_code"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "johndoe@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "secret_code": {
+            "type": "string",
+            "example": "123456"
+          }
+        }
+      },
+      "ChangePassword": {
+        "required": [
+          "username",
+          "password",
+          "secret_code"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "johndoe@email.com"
+          },
+          "method": {
+            "type": "string",
+            "example": "sms",
+            "description": "Send code method",
+            "enum": [
+              "email",
+              "sms"
+            ]
+          }
+        }
+      },
+      "User": {
+        "required": [
+          "username",
+          "person_id",
+          "permission_id"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "johndoe@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456"
+          },
+          "person_id": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "permission_id": {
+            "type": "number",
+            "example": 1
+          },
+          "google_id": {
+            "type": "string",
+            "example": null
+          },
+          "status": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "Permission": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "master"
+          },
+          "status": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": true,
+              "payload": {}
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "payload": {}
+              }
+            }
+          }
+        }
+      },
+      "201": {
+        "description": "Created",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": true,
+              "payload": {}
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "payload": {}
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": false,
+              "error": {
+                "code": "ER01",
+                "message": "error message",
+                "details": "error message details"
+              }
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Not authorized",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": false,
+              "error": {
+                "code": "ER01",
+                "message": "error message",
+                "details": "error message details"
+              }
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "JWT": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

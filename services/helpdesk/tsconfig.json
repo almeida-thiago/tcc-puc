@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "lib": [
+      "es2015"
+    ],
+    "sourceMap": false,
+    "outDir": "./out",
+    "rootDir": "./src",
+    "removeComments": true,
+    "isolatedModules": false,
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": false,
+    "baseUrl": "./src",
+    "paths": {
+      "@routes/*": [
+        "./routes/*"
+      ],
+      "@models/*": [
+        "./models/*"
+      ],
+      "@enums/*": [
+        "./enums/*"
+      ],
+      "@controllers/*": [
+        "./controllers/*"
+      ],
+      "@services/*": [
+        "./services/*"
+      ],
+      "@repositories/*": [
+        "./repositories/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
+      ]
+    }
+  },
+  "exclude": [
+    "src/tests"
+  ]
+}

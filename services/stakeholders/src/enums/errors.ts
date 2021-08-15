@@ -1,0 +1,17 @@
+export enum Errors {
+  E404 = 'not found',
+  E401 = 'access denied',
+  E429 = 'too many requests',
+  EPC1 = 'cannot create person',
+  EPR2 = 'cannot read people',
+  EPU3 = 'cannot update person',
+  EPD4 = 'cannot delete person',
+  EEC1 = 'cannot create person e-mail',
+  EER2 = 'cannot read person e-mails',
+  EEU3 = 'cannot update person e-mail',
+  EED4 = 'cannot delete person e-mail',
+  ETC1 = 'cannot create person telephone',
+  ETR2 = 'cannot read person telephones',
+  ETU3 = 'cannot update person telephone',
+  ETD4 = 'cannot delete person telephone',
+}

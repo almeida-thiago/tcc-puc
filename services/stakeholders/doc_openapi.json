@@ -1,0 +1,595 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Stakeholders",
+    "description": "Create, read, update and delete people, e-mails, addresses and phone numbers.",
+    "contact": {
+      "name": "Kodit Tecnologia",
+      "email": "ola@kodit.com.br"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [{
+      "url": "http://localhost:9000"
+    },
+    {
+      "url": "http://app.kodit.com.br/stakeholders"
+    }
+  ],
+  "tags": [
+    {
+      "name": "People",
+      "description": "Creating, reading, updating and removing people"
+    },
+    {
+      "name": "E-mails",
+      "description": "Creating, reading, updating and removing people e-mails"
+    },
+    {
+      "name": "Phone Numbers",
+      "description": "Creating, reading, updating and removing people phone numbers"
+    }
+  ],
+  "paths": {
+    "/v1/people": {
+      "post": {
+        "tags": ["People"],
+        "summary": "Creates a new person",
+        "operationId": "createPeople",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "get": {
+        "tags": ["People"],
+        "summary": "Read one person or all people",
+        "operationId": "readPeople",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "put": {
+        "tags": ["People"],
+        "summary": "Updates an existing person",
+        "operationId": "updatePeople",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "delete": {
+        "tags": ["People"],
+        "summary": "Delete an exisitng person",
+        "operationId": "deletePeople",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/people/emails": {
+      "post": {
+        "tags": ["E-mails"],
+        "summary": "Creates a new person e-mail",
+        "operationId": "createPeopleEmails",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Email"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "get": {
+        "tags": ["E-mails"],
+        "summary": "Read one e-mail or all e-mails for person",
+        "operationId": "readPeopleEmails",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        },{
+          "name": "person",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "put": {
+        "tags": ["E-mails"],
+        "summary": "Updates an existing person e-mail",
+        "operationId": "updatePeopleEmails",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Email"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "delete": {
+        "tags": ["E-mails"],
+        "summary": "Delete an exisitng person e-mail",
+        "operationId": "deletePeopleEmails",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    },
+    "/v1/people/phone-numbers": {
+      "post": {
+        "tags": ["Phone Numbers"],
+        "summary": "Creates a new phone number for person",
+        "operationId": "createPeoplePhoneNumbers",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhoneNumber"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "get": {
+        "tags": ["Phone Numbers"],
+        "summary": "Read one phone number or all phone numbers for person",
+        "operationId": "readPeoplePhoneNumbers",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        },{
+          "name": "person",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "put": {
+        "tags": ["Phone Numbers"],
+        "summary": "Updates an existing person phone number",
+        "operationId": "updatePeoplePhoneNumbers",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhoneNumber"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      },
+      "delete": {
+        "tags": ["Phone Numbers"],
+        "summary": "Delete an exisitng person phone number",
+        "operationId": "deletePeoplePhoneNumber",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        },
+        "security": [{
+          "JWT": []
+        }]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Person": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "johndoe@email.com"
+          },
+          "phone_number": {
+            "type": "number",
+            "example": 551150001234
+          }
+        }
+      },
+      "Email": {
+        "required": [
+          "email",
+          "person_id"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "johndoe@email.com"
+          },
+          "person_id": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "is_primary": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "PhoneNumber": {
+        "required": [
+          "phone_number",
+          "person_id"
+        ],
+        "type": "object",
+        "properties": {
+          "phone_number": {
+            "type": "string",
+            "example": "55111234567"
+          },
+          "person_id": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "is_primary": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": true,
+              "payload": {}
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "payload": {}
+              }
+            }
+          }
+        }
+      },
+      "201": {
+        "description": "Created",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": true,
+              "payload": {}
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "payload": {}
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": false,
+              "error": {
+                "code": "ER01",
+                "message": "error message",
+                "details": "error message details"
+              }
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Not authorized",
+        "content": {
+          "application/json": {
+            "example": {
+              "success": false,
+              "error": {
+                "code": "ER01",
+                "message": "error message",
+                "details": "error message details"
+              }
+            },
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "JWT": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
